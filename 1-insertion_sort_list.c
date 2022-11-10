@@ -19,17 +19,17 @@ void insertion_sort_list(listint_t **list)
     tmp = *list;
     while (tmp->next)
     {
-        if (tmp-> > tmp->next->n)
+        if (tmp->n > tmp->next->n)
         {
             tmp->next->prev = tmp->prev;
             if (tmp->next->prev)
-                tmp->prev->next =tmp->next;
+                tmp->prev->next = tmp->next;
             else
                 *list = tmp->next;
 
             tmp->prev = tmp->next;
-            tmp->next = temp->next->next;
-            tmp->prev->next =tmp;
+            tmp->next = tmp->next->next;
+            tmp->prev->next = tmp;
             if (tmp->next)
                 tmp->next->prev = tmp;
 
