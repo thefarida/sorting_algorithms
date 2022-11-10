@@ -2,34 +2,52 @@
 
 /**
  * insertion_sort_list - Sorts a doubly linked list
- * according to Insertion sort algorithm.
+ * of integers in ascending order using
+ * the Insertion sort algorithm.
  * @list: The doubly linked list.
  * 
  * Return: Nothing.
 */
 void insertion_sort_list(listint_t **list)
 {
-    listint_t *aux, *tmp, *prev;
-    if (!list)
-    return;
-    aux = *list;
-    tmp = aux->next;
-    while (tmp)
+    bool flag = false;
+    listint_t *tmp = NULL, *aux = NULL;
+
+    if (!list || !(*list) || !(*list)->next)
+        return;
+
+    tmp = *list;
+    while (tmp->next)
     {
-        aux = tmp;
-        tmp = tmp->next;
-        prev = aux->prev;
-        while (prev && (aux->n < prev->n))
+        if (tmp-> > tmp->next->n)
         {
-            if (prev->prev)
-                prev->prev->next = aux;
-                aux->prev = prev->prev;
-                prev->next = prev;
-                prev->prev = aux;
-            if (!aux->prev)
-                *list =aux;
-                prev = aux->prev;
+            tmp->next->prev = tmp->prev;
+            if (tmp->next->prev)
+                tmp->prev->next =tmp->next;
+            else
+                *list = tmp->next;
+
+            tmp->prev = tmp->next;
+            tmp->next = temp->next->next;
+            tmp->prev->next =tmp;
+            if (tmp->next)
+                tmp->next->prev = tmp;
+
+            tmp = tmp->prev;
             print_list(*list);
+
+            if (tmp->prev && tmp->prev->n > tmp->n)
+            {
+                if (!flag)
+                    aux = tmp->next;
+                flag = true;
+                tmp = tmp->prev;
+                continue;
+            }
         }
+        if (!flag)
+            tmp = tmp->next;
+        else
+            tmp = aux, flag = false;
     }
 }
